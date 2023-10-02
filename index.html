@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jonathan Messer</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #header {
+            text-align: center;
+            padding: 20px;
+            font-size: 40pt;
+        }
+        
+        #nav {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 300px;
+        }
+        
+        #nav a {
+            display: block;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 28pt;
+        }
+        
+        #box {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            display: none;
+        }
+        
+        #box:hover {
+            background-color: yellow;
+        }
+        
+        /* Media Queries */
+        @media only screen and (max-width: 768px) {
+            #header {
+                font-size: 48pt;
+            }
+            
+            #nav a {
+                font-size: 36pt;
+            }
+        }
+        
+        @media only screen and (max-width: 600px) {
+            #header {
+                font-size: 36pt;
+            }
+            
+            #nav a {
+                font-size: 28pt;
+            }
+        }
+        
+        @media only screen and (max-width: 480px) {
+            #header {
+                font-size: 32pt;
+            }
+            
+            #nav a {
+                font-size: 24pt;
+            }
+        }
+        
+        @media only screen and (max-width: 320px) {
+            #header {
+                font-size: 28pt;
+            }
+            
+            #nav a {
+                font-size: 20pt;
+            }
+        }
+    </style>
+    <script>
+        // JavaScript code remains the same
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var navElement = document.getElementById('nav');
+            var headerHeight = document.getElementById('header').offsetHeight;
+            var randomTop = Math.floor(Math.random() * (window.innerHeight - headerHeight - navElement.offsetHeight - 200)) + 200;
+            var randomLeft = Math.floor(Math.random() * (window.innerWidth - navElement.offsetWidth));
+            navElement.style.top = randomTop + 'px';
+            navElement.style.left = randomLeft + 'px';
+            
+            var boxElement = document.getElementById('box');
+            var randomBoxTop = Math.floor(Math.random() * (randomTop - headerHeight - boxElement.offsetHeight));
+            var randomBoxLeft = Math.floor(Math.random() * (window.innerWidth - boxElement.offsetWidth));
+            boxElement.style.top = randomBoxTop + 'px';
+            boxElement.style.left = randomBoxLeft + 'px';
+            boxElement.style.display = 'block';
+            
+            var headerElement = document.getElementById('header');
+            var headerRect = headerElement.getBoundingClientRect();
+            
+            while (
+                randomBoxTop <= headerRect.bottom &&
+                randomBoxTop + boxElement.offsetHeight >= headerRect.top &&
+                randomBoxLeft <= headerRect.right &&
+                randomBoxLeft + boxElement.offsetWidth >= headerRect.left
+            ) {
+                randomBoxTop = Math.floor(Math.random() * (randomTop - headerHeight - boxElement.offsetHeight));
+                randomBoxLeft = Math.floor(Math.random() * (window.innerWidth - boxElement.offsetWidth));
+                boxElement.style.top = randomBoxTop + 'px';
+                boxElement.style.left = randomBoxLeft + 'px';
+            }
+            
+            var links = navElement.getElementsByTagName('a');
+            var colors = generateRandomColors(links.length);
+            
+            for (var i = 0; i < links.length; i++) {
+                links[i].style.color = colors[i];
+            }
+        });
+        
+        function generateRandomColors(num) {
+            var colors = [];
+            
+            for (var i = 0; i < num; i++) {
+                var uniqueColor = false;
+                var color;
+                
+                while (!uniqueColor) {
+                    color = getRandomColor();
+                    
+                    if (!colors.includes(color)) {
+                        uniqueColor = true;
+                        colors.push(color);
+                    }
+                }
+            }
+            
+            return colors;
+        }
+        
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            
+            return color;
+        }
+    </script>
+</head>
+<body>
+    <div id="header">
+        Jonathan Messer
+    </div>
+    
+    <div id="nav">
+        <a href="portfolio.html">About Me</a>
+        <a href="links.html">Links</a>
+        <a href="blog.html">Blog</a>
+        <a href="blog.html">Blog</a>
+    </div>
+    
+    <div id="box" onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ','_blank')"></div>
+</body>
+</html>

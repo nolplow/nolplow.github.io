@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jonathan Messer - Links</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            font-size: 30pt;
+        }
+        
+        #links-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        #links-container a {
+            display: block;
+            text-decoration: none;
+            font-size: 21pt;
+            margin-bottom: 10px;
+        }
+        
+        #home-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 18pt;
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var links = document.querySelectorAll('#links-container a');
+            var colors = generateRandomColors(links.length);
+            
+            for (var i = 0; i < links.length; i++) {
+                links[i].style.color = colors[i];
+            }
+        });
+        
+        function generateRandomColors(count) {
+            var colors = [];
+            for (var i = 0; i < count; i++) {
+                var color = generateRandomColor();
+                while (colors.includes(color)) {
+                    color = generateRandomColor();
+                }
+                colors.push(color);
+            }
+            return colors;
+        }
+        
+        function generateRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</head>
+<body>
+    <a id="home-button" href="index.html">Home</a>
+    <h1>Jonathan Messer (links)</h1>
+    <div id="links-container">
+        <a href="https://www.linkedin.com/in/jnthnmssr/" target="_blank">LinkedIn</a>
+        <a href="https://www.instagram.com/jnthnmssr/" target="_blank">Instagram</a>
+        <a href="https://twitter.com/jnthnmssr" target="_blank">Twitter</a>
+        <a href="mailto:jcmesser@bu.edu">Email</a>
+    </div>
+	
+</body>
+</html>
